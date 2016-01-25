@@ -36,8 +36,9 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase");
+   // QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase");
     QString meti = item;
+    ui->listWidget->&item->text();
 
 
 
