@@ -36,7 +36,12 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    QFile file(item);
+    QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase");
+    QString meti = item;
+
+
+
+    QFile file(meti);
     if(!file.open(QIODevice::ReadOnly))
         QMessageBox::information(0, "info", file.errorString());
     QTextStream in(&file);

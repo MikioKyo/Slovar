@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QDir directory("C:/Users/Mikio/Desktop/slovar/slbase");
     QStringList txtFilesAndDirectories = directory.entryList(nameFilter);
     foreach (QString str, txtFilesAndDirectories) {
-        // cout << str.toLocal8Bit().constData() << endl;
+         cout << str.toLocal8Bit().constData() << endl;
     }
 
 
