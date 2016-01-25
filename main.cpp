@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDir>
 #include <iostream>
+#include <QTextStream>
 #include <cstdlib>
 using namespace std;
 
@@ -19,5 +20,9 @@ int main(int argc, char *argv[])
     foreach (QString str, txtFilesAndDirectories) {
         // cout << str.toLocal8Bit().constData() << endl;
     }
+
+
+
+
     return a.exec();
 }
