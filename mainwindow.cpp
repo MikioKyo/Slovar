@@ -36,10 +36,11 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase");
+    QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase/");
     QString meti;
     meti=item->text();
     dir.append(meti);
+   // QMessageBox::information(0, "info", dir);
 
 
 
@@ -51,7 +52,8 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 
     QFile listWidgetItem(dir);
     if(!listWidgetItem.open(QIODevice::ReadOnly))
-        QMessageBox::information(0, "info", listWidgetItem.errorString());
-   // QTextStream in(ite);
-   // ui->textEdit->setText(in.readLine());
+        QMessageBox::information(0, "Ошибка!", listWidgetItem.errorString());
+    QTextStream in(&listWidgetItem);
+    ui->textEdit->setText(in.readAll());
+    listWidgetItem.close();
 }
