@@ -39,6 +39,8 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase");
     QString meti;
     meti=item->text();
+    dir.append(meti);
+
 
 
    // ui->listWidget->item->text();
@@ -47,9 +49,9 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 
 
 
-    QFile ite(meti);
-    if(!ite.open(QIODevice::ReadOnly))
-        QMessageBox::information(0, "info", ite.errorString());
-    QTextStream in(ite);
-    ui->textEdit->setText(in.readLine());
+    QFile listWidgetItem(dir);
+    if(!listWidgetItem.open(QIODevice::ReadOnly))
+        QMessageBox::information(0, "info", listWidgetItem.errorString());
+   // QTextStream in(ite);
+   // ui->textEdit->setText(in.readLine());
 }
