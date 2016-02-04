@@ -21,6 +21,8 @@ private slots:
 
     void on_listWidget_itemClicked(QListWidgetItem *item);
 
+    void on_infoButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
