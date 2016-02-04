@@ -54,12 +54,27 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     if(!listWidgetItem.open(QIODevice::ReadOnly)) // Если файл не откроется:
         QMessageBox::information(0, "Ошибка!", listWidgetItem.errorString()); // То вывести ошибку
     QTextStream in(&listWidgetItem); // переводим всё в текст стрим
-    ui->textEdit->setText(in.readLine()); // скармливаем текст стрим для его открытия
+    QString line;
+    do {
+        line = in.readLine();
+        QStringList list1 = line.split(";");
+        ui->textEdit->setText(list1[0]);
+        QMessageBox::information(0, "!!!!", line);
+    } while (!line.isNull());
+
+
+
+
+   // QStringList list1 = line.split(";");
+     // скармливаем текст стрим для его открытия
     listWidgetItem.close(); // освобождаем память
+
 }
 
 void MainWindow::on_infoButton_clicked() // Справка
 {
+  //  QLayout *layout = new QLayout;
+    //        ui->
     //ui->verticalLayout->;
     //ui->verticalLayout->textBrowser->setText("Чтобы начать работу, выберите тему справа. Для добавления новых файлов... ляляля");
 }
