@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -43,22 +44,19 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
    // QMessageBox::information(0, "info", dir);
 
 
-
-   // ui->listWidget->item->text();
-   // meti.toLocal8Bit().constData() << endl;
-
-
-
-
     QFile listWidgetItem(dir);
     if(!listWidgetItem.open(QIODevice::ReadOnly)) // Если файл не откроется:
         QMessageBox::information(0, "Ошибка!", listWidgetItem.errorString()); // То вывести ошибку
     QTextStream in(&listWidgetItem); // переводим всё в текст стрим
+    QString text_label = in.readLine();
+    ui->nameLabel->setText(text_label);
     QString line;
     do {
         line = in.readLine();
         QStringList list1 = line.split(";");
         ui->textEdit->setText(list1[0]);
+        ui->answerButton->setText(list1[1]);
+        ui->answerButton_2->setText(list1[2]);
         QMessageBox::information(0, "!!!!", line);
     } while (!line.isNull());
 
@@ -73,8 +71,12 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 
 void MainWindow::on_infoButton_clicked() // Справка
 {
-  //  QLayout *layout = new QLayout;
-    //        ui->
-    //ui->verticalLayout->;
-    //ui->verticalLayout->textBrowser->setText("Чтобы начать работу, выберите тему справа. Для добавления новых файлов... ляляля");
+    QWidget *layout = new QWidget;
+    QTextEdit *infoText = new QTextEdit;
+    QHBoxLayout *infoWindow = new QHBoxLayout;
+    layout->setLayout(infoWindow);
+    infoWindow->addWidget(infoText);
+    infoText->setReadOnly(true);
+    infoText->setText("Пробная справкагнрн7гр67горпамиигнр67отттттттттттть");
+    layout->show();
 }
