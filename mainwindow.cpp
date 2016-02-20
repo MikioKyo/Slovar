@@ -61,8 +61,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         ui->answerButton->setText(list1[1]);
         ui->answerButton_2->setText(list1[2]);
 }
-        else
-            QMessageBox::information(0, "!!!!", line);
+        else;
 
 
     } while (!line.isNull());
