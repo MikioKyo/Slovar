@@ -51,13 +51,20 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     QString text_label = in.readLine();
     ui->nameLabel->setText(text_label);
     QString line;
+
     do {
         line = in.readLine();
         QStringList list1 = line.split(";");
+        QMessageBox::information(0, "!!!!", line);
+        if (list1.count() == 3){
         ui->textEdit->setText(list1[0]);
         ui->answerButton->setText(list1[1]);
         ui->answerButton_2->setText(list1[2]);
-        QMessageBox::information(0, "!!!!", line);
+}
+        else
+            QMessageBox::information(0, "!!!!", line);
+
+
     } while (!line.isNull());
 
 
