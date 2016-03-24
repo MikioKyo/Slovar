@@ -8,6 +8,8 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QHBoxLayout>
+#include "QTime"
+#
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -43,7 +45,6 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     dir.append(meti); // Складываем две переменные.
    // QMessageBox::information(0, "info", dir);
 
-
     QFile listWidgetItem(dir);
     if(!listWidgetItem.open(QIODevice::ReadOnly)) // Если файл не откроется:
         QMessageBox::information(0, "Ошибка!", listWidgetItem.errorString()); // То вывести ошибку
@@ -55,22 +56,27 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     do {
         line = in.readLine();
         QStringList list1 = line.split(";");
-        QMessageBox::information(0, "!!!!", line);
+      //  QMessageBox::information(0, "!!!!", line);
+
         if (list1.count() == 3){
         ui->textEdit->setText(list1[0]);
         ui->answerButton->setText(list1[1]);
         ui->answerButton_2->setText(list1[2]);
+        QTime midnight(0,0,0);
+        qsrand(midnight.secsTo(QTime::currentTime()));
+        int qrand();
+        bool buttonOn;
+        buttonOn = false;
+        QObject::connect(&answerButton, SIGNAL(clicked()), &buttonOn, SLOT(set(true)));
+        QCoreApplication::processEvents();
+
 }
         else;
 
 
+
     } while (!line.isNull());
 
-
-
-
-   // QStringList list1 = line.split(";");
-     // скармливаем текст стрим для его открытия
     listWidgetItem.close(); // освобождаем память
 
 }

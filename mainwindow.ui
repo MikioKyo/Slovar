@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
@@ -73,7 +76,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="answerButton_2">
@@ -86,7 +89,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="infoButton">
@@ -125,7 +128,7 @@
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>Тема:</string>
     </property>
    </widget>
   </widget>
