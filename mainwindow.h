@@ -25,6 +25,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+private slots:
+    bool buttonOn;
 };
 
 #endif // MAINWINDOW_H

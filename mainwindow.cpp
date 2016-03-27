@@ -67,7 +67,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         int qrand();
         bool buttonOn;
         buttonOn = false;
-        QObject::connect(&answerButton, SIGNAL(clicked()), &buttonOn, SLOT(set(true)));
+        QObject::connect(&answerButton, SIGNAL(clicked()), &buttonOn, SLOT());
         QCoreApplication::processEvents();
 
 }
