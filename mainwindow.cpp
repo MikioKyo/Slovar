@@ -67,7 +67,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         int qrand();
         bool buttonOn;
         buttonOn = false;
-        QObject::connect(&ui->answerButton, SIGNAL(clicked()), &buttonOn, SLOT());
+ //       QObject::connect(&ui->answerButton, SIGNAL(clicked()), &buttonOn, SLOT());
         QCoreApplication::processEvents();
 
 }
@@ -91,4 +91,9 @@ void MainWindow::on_infoButton_clicked() // Справка
     infoText->setReadOnly(true);
     infoText->setText("Пробная справкагнрн7гр67горпамиигнр67отттттттттттть");
     layout->show();
+}
+
+void MainWindow::buttonOn()
+{
+    QMessageBox::information(this, "Title", "Hello World!");
 }

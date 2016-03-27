@@ -70,7 +70,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>170</y>
+      <y>180</y>
       <width>71</width>
       <height>61</height>
      </rect>
@@ -82,8 +82,8 @@
    <widget class="QPushButton" name="answerButton_2">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>170</y>
+      <x>280</x>
+      <y>180</y>
       <width>71</width>
       <height>61</height>
      </rect>
@@ -131,6 +131,27 @@
      <string>Тема:</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>40</y>
+      <width>311</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -154,7 +175,24 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>answerButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>buttonOn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>196</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>75</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>buttonOn()</slot>
  </slots>
