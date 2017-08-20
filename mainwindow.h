@@ -27,6 +27,7 @@ private:
     Ui::MainWindow *ui;
 private slots:
     void buttonOn();
+    void on_answerButton_clicked();
 };
 
 #endif // MAINWINDOW_H

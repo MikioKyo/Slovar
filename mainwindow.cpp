@@ -9,7 +9,6 @@
 #include <QMessageBox>
 #include <QHBoxLayout>
 #include "QTime"
-#
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QStringList nameFilter("*.txt"); // Фильтр по которому отделяют файлы
-    QDir directory("C:/Users/Mikio/Desktop/slovar/slbase"); // Директория с файлами
+    QDir directory("C:/Slovar-master/slbase/"); // Директория с файлами
     QStringList txtFilesAndDirectories = directory.entryList(nameFilter);
     foreach (QString str, txtFilesAndDirectories) {
         //cout << str.toLocal8Bit().constData() << endl;
@@ -39,7 +38,7 @@ void MainWindow::on_exitButton_clicked() // Кнопка выхода из пр�
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    QString dir = ("C:/Users/Mikio/Desktop/slovar/slbase/"); // Путь до файла
+    QString dir = ("C:/Slovar-master/slbase/"); // Путь до файла
     QString meti; // Название переменной
     meti=item->text(); // Присваиваем переменной значение нажатого предмета переведённого в текст
     dir.append(meti); // Складываем две переменные.
@@ -56,7 +55,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     do {
         line = in.readLine();
         QStringList list1 = line.split(";");
-      //  QMessageBox::information(0, "!!!!", line);
+       // QMessageBox::information(0, "!!!!", line);
 
         if (list1.count() == 3){
         ui->textEdit->setText(list1[0]);
@@ -67,7 +66,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         int qrand();
         bool buttonOn;
         buttonOn = false;
- //       QObject::connect(&ui->answerButton, SIGNAL(clicked()), &buttonOn, SLOT());
+       // QObject::connect(&ui->answerButton, SIGNAL(clicked()), &buttonOn, SLOT());
         QCoreApplication::processEvents();
 
 }
@@ -75,7 +74,9 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 
 
 
-    } while (!line.isNull());
+    }
+
+    while (!line.isNull());
 
     listWidgetItem.close(); // освобождаем память
 
@@ -89,11 +90,16 @@ void MainWindow::on_infoButton_clicked() // Справка
     layout->setLayout(infoWindow);
     infoWindow->addWidget(infoText);
     infoText->setReadOnly(true);
-    infoText->setText("Пробная справкагнрн7гр67горпамиигнр67отттттттттттть");
+    infoText->setText("Пробная справка");
     layout->show();
 }
 
 void MainWindow::buttonOn()
 {
-    QMessageBox::information(this, "Title", "Hello World!");
+
+}
+
+void MainWindow::on_answerButton_clicked()
+{
+
 }
