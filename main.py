@@ -13,8 +13,10 @@ def press(button):
     elif button == "Выбрать":
         name = app.getListItems("list")[0]
         app.setLabel("header", name[:-4])
-        otv=open(list).readlines().splitlines(";")
-        app.setLabel("main_phrase", otv)
+        otv=open(name).readlines()[0].split(";")
+        app.setLabel("main_phrase", otv[0])
+        app.setButton("ы", otv[1])
+        app.setButton("и", otv[2])
     else:
         usr = "123"
         pwd = app.getEntry("Password")
@@ -32,7 +34,7 @@ app.addLabel("header", "Общий диктант на разные правил
 # Left column with files list and exit buttons
 app.startPanedFrame("select_window", row=1, column=0)
 
-files = listdir("./slbase")
+files = listdir("./")
 mytxt = list(filter(lambda x: x.endswith('.txt'), files))
 
 app.addListBox("list", mytxt, 1,2,1,2)
