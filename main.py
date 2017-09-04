@@ -1,7 +1,10 @@
 ﻿# import the library
 from appJar import gui
 from os import listdir
- 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
  
 # grid tip
 # "row=1 column=2 colspan=1 rowspan=2", 1, 2, 1, 2)
