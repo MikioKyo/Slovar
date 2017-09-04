@@ -5,22 +5,36 @@ from os import listdir
  
 # grid tip
 # "row=1 column=2 colspan=1 rowspan=2", 1, 2, 1, 2)
- 
 # handle button events
+line = 0
+
 def press(button):
+    global line
     if button == "Cancel" or button == "Выход":
         app.stop()
     elif button == "Выбрать":
-        name = app.getListItems("list")[0]
+        name = app.getListItems("list")[line]
         app.setLabel("header", name[:-4])
         otv=open(name).readlines()[0].split(";")
         app.setLabel("main_phrase", otv[0])
         app.setButton("ы", otv[1])
         app.setButton("и", otv[2])
+        
+    elif button == "ы" or button == "и":
+        name = app.getListItems("list")[0]
+        otv=open(name).readlines()[line].split(";")
+        app.setLabel("main_phrase", otv[0])
+        app.setButton("ы", otv[1])
+        app.setButton("и", otv[2])
+        line = line + 1
+        print(line, len(name))
+        if line == len(name):
+            a = 1
+            b = 2
+            print("Test")
+            app.infoBox("Результаты", "Правильных: {} \n Неправильных: {}".format(a, b))
     else:
-        usr = "123"
-        pwd = app.getEntry("Password")
-        print("User:", usr, "Pass:", pwd)
+        pass
  
 # create a GUI variable called app
 app = gui("Dictionary fiesta", "1280x550")
