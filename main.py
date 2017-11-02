@@ -5,9 +5,9 @@ from os import listdir
 # grid tip
 # "row=1 column=2 colspan=1 rowspan=2", 1, 2, 1, 2)
 # handle button events
-line = 1
-rightAnswer = 0
-wrongAnswer = 0
+lineNumber = 1
+rightAnswerCount = 0
+wrongAnswerCount = 0
 name = ""
 # otv = []
 exerciseHeader = ""
@@ -24,23 +24,24 @@ def selectExercise(button):
      #   lines = exerciseFile.readlines()
         exerciseHeader = exerciseFile.readline()
         exerciseLines = exerciseFile.readlines()
-def press(button):
-    global line
+    app.setLabel("header", exerciseHeader)
+def exercise(button):
+    global lineNumber
     global rightAnswer
     global wrongAnswer
-    global otv
     global exerciseHeader
     global exerciseLines
-    if button == "Cancel" or button == "Выход":
-        app.stop()
-    elif button == "Выбрать":
+    global rightAnswerCount
+    global wrongAnswerCount
+    
+    if button == "Выбрать":
         print(open(name, 'r', encoding='utf-8').readlines()[0])
         app.setLabel("main_phrase", exerciseHeader)
-        app.setButton("ы", otv[1])
-        app.setButton("и", otv[2])
+        app.setButton("ы", exerciseAnswerOne[1]) 	
+        app.setButton("и", exerciseAnswerTwo[2])
     elif button == "ы" or button == "и":
-        print(exerciseLines)
-        exercise = exerciseLines[line]
+       # print(exerciseLines)
+        exercise = exerciseLines[lineNumber]
         exerciseQuestion = exercise.split(";")[0]
         exerciseAnswerOne = exercise.split(";")[1]
         exerciseAnswerTwo = exercise.split(";")[2]
@@ -48,18 +49,21 @@ def press(button):
         app.setLabel("main_phrase", exerciseQuestion)
         app.setButton("ы", exerciseAnswerOne)
         app.setButton("и", exerciseAnswerTwo)
-        line = line + 1
-        print(line, len(exerciseLines))
-        right = exerciseRightAnswer
-        if line == len(exerciseLines):
-            a = 1
-            b = 2
+        lineNumber = lineNumber + 1
+        print(lineNumber, len(exerciseLines))
+
+        if answerButton1 == exerciseRightAnswer:
+            rightAnswerCount = rightAnswerCount + 1
+        else:
+            wrongAnswerCount = wrongAnswerCount + 1
+
+        if lineNumber == len(exerciseLines):
             print("Test")
-            app.infoBox("Результаты", "Правильных: {} \n Неправильных: {}".format(rightAnswer, b))
-        if "ы" == right:
-            rightAnswer = rightAnswer + 1 
+            app.infoBox("Результаты", "Правильных: {} \n Неправильных: {}".format(rightAnswerCount, wrongAnswerCount))
     else:
         pass
+def press(button):
+    app.stop()
  
 # create a GUI variable called app
 app = gui("Dictionary fiesta", "1280x550")
@@ -91,8 +95,14 @@ app.getLabelWidget("main_phrase").config(font="Times 30", width=30)
  
 # variants buttons
 app.startPanedFrame("p1")
-app.addButtons(["ы", "и"], press)
+
+answerButton1 = exerciseAnswerOne
+answerButton2 = exerciseAnswerTwo
+
+app.addButtons([answerButton1, answerButton2], exercise)
 app.stopPanedFrame()
+ 
+ 
  
 app.setLabelSticky("main_phrase", "wns")
 app.setPanedFrameSticky("p1", "ew")
