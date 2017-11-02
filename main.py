@@ -8,6 +8,7 @@ from os import listdir
 # "row=1 column=2 colspan=1 rowspan=2", 1, 2, 1, 2)
 # handle button events
 lineNumber = 1
+rightAnswer = ""
 rightAnswerCount = 0
 wrongAnswerCount = 0
 name = ""
@@ -19,6 +20,7 @@ def selectExercise(button):
     global name
     global otv
     global exerciseLines
+    global rightAnswer
 
     exerciseHeader = ""
     name = app.getListItems("list")[0]
@@ -30,43 +32,43 @@ def selectExercise(button):
     exerciseQuestion = exercise.split(";")[0]
     exerciseAnswerOne = exercise.split(";")[1]
     exerciseAnswerTwo = exercise.split(";")[2]
+    rightAnswer = exercise.split(";")[2]
+
 
     app.setLabel("header", exerciseHeader)
     app.setLabel("main_phrase", exerciseQuestion)
 
     app.setButton("first_answer_button", exerciseAnswerOne)
     app.setButton("second_answer_button", exerciseAnswerTwo)
-    print(app.getButton)
 
 
 def exercise(button):
     global lineNumber
     global rightAnswer
-    global wrongAnswer
     global exerciseLines
     global rightAnswerCount
     global wrongAnswerCount
+
+    print("Right answer: "+rightAnswer, "Your answer: "+app.getButtonWidget(button)['text'])
+    if app.getButtonWidget(button)['text'] == rightAnswer:
+        print("Right!")
+        rightAnswerCount = rightAnswerCount + 1
+    else:
+        print("Wrong(")
+        wrongAnswerCount = wrongAnswerCount + 1
 
 
     exercise = exerciseLines[lineNumber]
     exerciseQuestion = exercise.split(";")[0]
     exerciseAnswerOne = exercise.split(";")[1]
     exerciseAnswerTwo = exercise.split(";")[2]
-    exerciseRightAnswer = exercise.split(";")[3]
+    rightAnswer = exercise.split(";")[3]
     app.setLabel("main_phrase", exerciseQuestion)
     app.setButton("first_answer_button", exerciseAnswerOne)
     app.setButton("second_answer_button", exerciseAnswerTwo)
 
     lineNumber = lineNumber + 1
     print(lineNumber, len(exerciseLines))
-
-    print("Right answer: "+exerciseRightAnswer, "Your answer: "+app.getButtonWidget(button)['text'])
-    if app.getButtonWidget(button)['text'] == exerciseRightAnswer:
-        print("Right!")
-        rightAnswerCount = rightAnswerCount + 1
-    else:
-        print("Wrong(")
-        wrongAnswerCount = wrongAnswerCount + 1
 
     if lineNumber == len(exerciseLines):
         print("Test")
