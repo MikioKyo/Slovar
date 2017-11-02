@@ -29,10 +29,10 @@ def selectExercise(button):
         exerciseLines = exerciseFile.readlines()
     print(exerciseHeader)
     exercise = exerciseLines[0]
-    exerciseQuestion = exercise.split(";")[0]
-    exerciseAnswerOne = exercise.split(";")[1]
-    exerciseAnswerTwo = exercise.split(";")[2]
-    rightAnswer = exercise.split(";")[2]
+    exerciseQuestion = exercise.split(";")[0].strip()
+    exerciseAnswerOne = exercise.split(";")[1].strip()
+    exerciseAnswerTwo = exercise.split(";")[2].strip()
+    rightAnswer = exercise.split(";")[3].strip()
 
 
     app.setLabel("header", exerciseHeader)
@@ -49,8 +49,10 @@ def exercise(button):
     global rightAnswerCount
     global wrongAnswerCount
 
-    print("Right answer: "+rightAnswer, "Your answer: "+app.getButtonWidget(button)['text'])
-    if app.getButtonWidget(button)['text'] == rightAnswer:
+    button_clicked = app.getButtonWidget(button)['text']
+
+    print("Right answer: "+rightAnswer, "Your answer: "+button_clicked)
+    if button_clicked == rightAnswer:
         print("Right!")
         rightAnswerCount = rightAnswerCount + 1
     else:
@@ -59,10 +61,10 @@ def exercise(button):
 
 
     exercise = exerciseLines[lineNumber]
-    exerciseQuestion = exercise.split(";")[0]
-    exerciseAnswerOne = exercise.split(";")[1]
-    exerciseAnswerTwo = exercise.split(";")[2]
-    rightAnswer = exercise.split(";")[3]
+    exerciseQuestion = exercise.split(";")[0].strip()
+    exerciseAnswerOne = exercise.split(";")[1].strip()
+    exerciseAnswerTwo = exercise.split(";")[2].strip()
+    rightAnswer = exercise.split(";")[3].strip()
     app.setLabel("main_phrase", exerciseQuestion)
     app.setButton("first_answer_button", exerciseAnswerOne)
     app.setButton("second_answer_button", exerciseAnswerTwo)
