@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow
+from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QButtonGroup
 import sys
 from os import listdir
 import random
@@ -96,11 +96,13 @@ class Ui_MainWindow(object):
         self.answerButtonOne = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         self.answerButtonOne.setObjectName("answerButtonOne")
         self.horizontalLayout_4.addWidget(self.answerButtonOne)
-        self.answerButtonOne.clicked.connect(self.selectAnswer)
         self.answerButtonTwo = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         self.answerButtonTwo.setObjectName("answerButtonTwo")
         self.horizontalLayout_4.addWidget(self.answerButtonTwo)
-        self.answerButtonTwo.clicked.connect(self.selectAnswer)
+        self.answerButtonGroup = QButtonGroup()
+        self.answerButtonGroup.addButton(self.answerButtonOne)
+        self.answerButtonGroup.addButton(self.answerButtonTwo)
+        self.answerButtonGroup.buttonClicked.connect(self.selectAnswer)
         self.verticalLayout_4.addLayout(self.horizontalLayout_4)
         self.horizontalLayout_2.addWidget(self.groupBox)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -152,16 +154,16 @@ class Ui_MainWindow(object):
         self.answerButtonOne.setText(exerciseAnswerOne)
         self.answerButtonTwo.setText(exerciseAnswerTwo)
         
-    def selectAnswer(self):
+    def selectAnswer(self, answerButtonGroup):
         global lineNumber
         global rightAnswer
         global exerciseLines
         global rightAnswerCount
         global wrongAnswerCount
 
-
-   #     print("Right answer: "+rightAnswer, "Your answer: "+self.selectAnswer)
-        if self.selectAnswer == rightAnswer:
+        button_clicked = self.answerButtonGroup.checkedButton()
+        print("Right answer: "+rightAnswer, "Your answer: "+button_clicked.text())
+        if button_clicked.text() == rightAnswer:
             print("Right!")
             rightAnswerCount = rightAnswerCount + 1
         else:
