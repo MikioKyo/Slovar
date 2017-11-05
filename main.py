@@ -84,7 +84,7 @@ def press(button):
     app.stop()
  
 # create a GUI variable called app
-app = gui("Dictionary fiesta", "1280x550")
+app = gui("Dictionary fiesta", "900x550")
 app.setFont(18)
 app.setResizable(canResize=False)
 app.setStretch("both")
@@ -103,7 +103,7 @@ app.addListBox("list", mytxt, 1,2,2,2)
 app.addButton("Выбрать", selectExercise, row=3, column=2)
 app.addButton("Выход", press, row=3, column=3)
 app.stopPanedFrame()
-app.getListBoxWidget("list").config(width=1)
+app.getListBoxWidget("list").config(width=2)
  
  
 # Right column with main actions
