@@ -8,7 +8,7 @@ import random
 # grid tip
 # "row=1 column=2 colspan=1 rowspan=2", 1, 2, 1, 2)
 # handle button events
-lineNumber = 1
+lineNumber = 0
 rightAnswer = ""
 rightAnswerCount = 0
 wrongAnswerCount = 0
@@ -35,13 +35,13 @@ def selectExercise(button):
     exerciseAnswerTwo = exercise.split(";")[2].strip()
     rightAnswer = exercise.split(";")[3].strip()
 
-
     app.setLabel("header", exerciseHeader)
     app.setLabel("main_phrase", exerciseQuestion)
 
     app.setButton("first_answer_button", exerciseAnswerOne)
     app.setButton("second_answer_button", exerciseAnswerTwo)
-
+    app.setStatusbar("Неправильных: 0", field=1)
+    app.setStatusbar("Правильных: 0", field=2)
 
 def exercise(button):
     global lineNumber
@@ -56,9 +56,15 @@ def exercise(button):
     if button_clicked == rightAnswer:
         print("Right!")
         rightAnswerCount = rightAnswerCount + 1
+        app.setStatusbar("Правильных: {}".format(rightAnswerCount), field=2)
+        app.setStatusbar("Верно", field=0)
+        app.setStatusbarBg("green", field=0)
     else:
         print("Wrong(")
         wrongAnswerCount = wrongAnswerCount + 1
+        app.setStatusbar("Неправильных: {}".format(wrongAnswerCount), field=1)
+        app.setStatusbar("Неверно", field=0)
+        app.setStatusbarBg("red", field=0)
 
     questionShuffle = [1, 2]
     exercise = exerciseLines[lineNumber]
@@ -78,6 +84,20 @@ def exercise(button):
     if lineNumber == len(exerciseLines):
         print("Test")
         app.infoBox("Результаты", "Правильных: {} \n Неправильных: {}".format(rightAnswerCount, wrongAnswerCount))
+        
+        lineNumber = 1
+        rightAnswer = ""
+        rightAnswerCount = 0
+        wrongAnswerCount = 0
+        name = ""
+        exerciseLines = []
+        
+        app.setStatusbar("Ожидание", field=0)
+        app.setStatusbarBg("yellow", field=0)
+        app.setStatusbar("Неправильных: 0", field=1)
+        app.setStatusbar("Правильных: 0", field=2)
+    elif lineNumber > len(exerciseLines):
+        pass
 
 
 def press(button):
@@ -110,7 +130,6 @@ app.getListBoxWidget("list").config(width=2)
 app.startLabelFrame("main_window", row=1, column=1)
 app.addLabel("main_phrase", "без_дейный")
 app.getLabelWidget("main_phrase").config(font="Times 30", width=30)
- 
 # variants buttons
 app.startPanedFrame("p1")
 
@@ -118,8 +137,13 @@ app.startPanedFrame("p1")
 app.addNamedButton("", "first_answer_button", exercise, row=3, column=4)
 app.addNamedButton("", "second_answer_button", exercise, row=3, column=5)
 app.stopPanedFrame()
- 
- 
+
+app.addStatusbar(fields=3)
+app.setStatusbar("Ожидание", field=0)
+app.setStatusbarBg("yellow", field=0)
+app.setStatusbar("Неправильных: 0", field=1)
+app.setStatusbar("Правильных: 0", field=2)
+
  
 app.setLabelSticky("main_phrase", "wns")
 app.setPanedFrameSticky("p1", "ew")
