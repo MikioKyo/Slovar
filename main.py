@@ -99,7 +99,9 @@ def exercise(button):
     elif lineNumber > len(exerciseLines):
         pass
 
-
+def select(listWidget):
+    print(exerciseHeader)
+        
 def press(button):
     app.stop()
  
@@ -120,11 +122,10 @@ mytxt = list(filter(lambda x: x.endswith('.txt'), files))
 
 app.addListBox("list", mytxt, 1,2,2,2)
 #app.addButton(["Выбрать", "Выход"], press, row=3, column=2)
-app.addButton("Выбрать", selectExercise, row=3, column=2)
-app.addButton("Выход", press, row=3, column=3)
+app.addButton("Выход", press, row=3, column=3, colspan=2)
 app.stopPanedFrame()
 app.getListBoxWidget("list").config(width=2)
- 
+app.getListBoxWidget("list").bind("<<ListboxSelect>>", selectExercise)
  
 # Right column with main actions
 app.startLabelFrame("main_window", row=1, column=1)
@@ -132,6 +133,7 @@ app.addLabel("main_phrase", "без_дейный")
 app.getLabelWidget("main_phrase").config(font="Times 30", width=30)
 # variants buttons
 app.startPanedFrame("p1")
+app.setSticky("sw")
 
 # app.addButtons(["1", "2"], exercise)
 app.addNamedButton("", "first_answer_button", exercise, row=3, column=4)
@@ -148,7 +150,7 @@ app.setStatusbar("Правильных: 0", field=2)
 app.setLabelSticky("main_phrase", "wns")
 app.setPanedFrameSticky("p1", "ew")
 app.stopLabelFrame()
- 
+
 app.setPanedFrameSticky("select_window", "nsw")
 app.setLabelFrameSticky("main_window", "nsew")
  
